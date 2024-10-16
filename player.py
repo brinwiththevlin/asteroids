@@ -2,9 +2,12 @@ from pygame import Surface, Vector2
 import pygame
 from circleshape import CircleShape
 from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
+from groups import updatable, drawable
 
 
 class Player(CircleShape):
+    containers = (updatable, drawable)
+
     def __init__(self, x: float, y: float) -> None:
         super().__init__(x, y, PLAYER_RADIUS)
 
@@ -13,7 +16,7 @@ class Player(CircleShape):
         # in the player class
 
     def rotate(self, dt: float):
-        self.rotation += PLAYER_TURN_SPEED*dt
+        self.rotation += PLAYER_TURN_SPEED * dt
 
     def triangle(self) -> list[Vector2]:
         forward: Vector2 = Vector2(0, 1).rotate(self.rotation)
