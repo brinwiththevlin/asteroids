@@ -25,9 +25,13 @@ def main():
         for thing in updatable:
             thing.update(dt)
         for thing in asteroids:
-            if thing.collision(player):
+            if thing.radius != 0 and thing.collision(player):
                 print("game over!")
                 return
+            for b in shots:
+                if thing.collision(b):
+                    thing.destroy()
+                    b.kill()
 
         for thing in drawable:
             thing.draw(screen)
