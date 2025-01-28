@@ -2,7 +2,10 @@ README.md
 pyproject.toml
 tox.ini
 src/asteroids/__init__.py
+src/asteroids/circlshape.py
+src/asteroids/constants.py
 src/asteroids/main.py
+src/asteroids/player.py
 src/asteroids.egg-info/PKG-INFO
 src/asteroids.egg-info/SOURCES.txt
 src/asteroids.egg-info/dependency_links.txt
