@@ -6,21 +6,21 @@ import pygame
 from pygame.surface import Surface
 
 from asteroids.circlshape import CircleShape
-from asteroids.constants import PLAYER_RADIUS, PLAYER_TURN_SPEED
+from asteroids.constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
+from asteroids.groups import updatable, drawable
 
 
 class Player(CircleShape):
     """Player class."""
 
-    def __init__(self, x: float, y: float, *groups: pygame.sprite.Group) -> None:
+    def __init__(self, x: float, y: float) -> None:
         """Constructor for player class.
 
         Args:
             x: x position of center of player
             y: y position of center of player
-            groups: sprite groups the player belongs to
         """
-        super().__init__(x, y, PLAYER_RADIUS, *groups)
+        super().__init__(x, y, PLAYER_RADIUS, updatable, drawable)
 
         self.rotation = 0
 
@@ -62,3 +62,16 @@ class Player(CircleShape):
             self.rotate(-dt)
         if keys[pygame.K_d]:
             self.rotate(dt)
+        if keys[pygame.K_w]:
+            self.move(dt)
+        if keys[pygame.K_s]:
+            self.move(-dt)
+
+    def move(self, dt: float) -> None:
+        """Update position based on rotation.
+
+        Args:
+            dt: delta from frame rate
+        """
+        forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        self.position += forward * PLAYER_SPEED * dt
