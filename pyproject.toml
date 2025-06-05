@@ -58,6 +58,12 @@ dev = [
 
 ]
 
+[tool.pyright]
+exclude = [".venv"]
+include = ["src/asteroids"]
+venvPath = "."
+venv = ".venv"
+
 [tool.black]
 line-length = 120
 
